@@ -25,6 +25,13 @@ class pokemon{
         int hpValue;
         int atkValue;
     public:
+        pokemon();
+        pokemon(string name,int attack);
+        pokemon(pokemon &old);
+        //Getters
+        int getHP();
+        int getAtk();
+        string getName();
        
 };
 
@@ -35,6 +42,11 @@ class pokedex{
         pokemon pokedexArray[100];
         int value;
     public:
+       pokedex(){
+        this->value = 0;
+       }
+       void updatePokedex(pokemon newPokemon);
+       void printPokedex();
        
 };
 
@@ -49,6 +61,12 @@ class player{
         pokemon playerPokemon;
     public:
         pokedex playerPokedex;
+        player();
+        player(string s, pokemon p);
+        int showPokemonNumber();
+        int showPokebollNumber();
+        int showBadgeNumber();
+        pokemon getPokemon();
         
 };
 
