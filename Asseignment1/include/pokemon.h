@@ -1,7 +1,7 @@
 //--- 2023-2024 Spring BLG 252E Object Oriented Programing Assignment 1 ---//
 //--------------------------//
-//---Name & Surname:
-//---Student Number:
+//---Name & Surname:Yusuf Bera Danışık  
+//---Student Number:150210105
 //--------------------------//
 
 #ifndef _H
@@ -27,7 +27,7 @@ class pokemon{
     public:
         pokemon();
         pokemon(string name,int attack);
-        pokemon(pokemon &old);
+        pokemon(const pokemon &old);
         //Getters
         int getHP();
         int getAtk();
@@ -42,9 +42,7 @@ class pokedex{
         pokemon pokedexArray[100];
         int value;
     public:
-       pokedex(){
-        this->value = 0;
-       }
+       pokedex();
        void updatePokedex(pokemon newPokemon);
        void printPokedex();
        
@@ -62,11 +60,13 @@ class player{
     public:
         pokedex playerPokedex;
         player();
-        player(string s, pokemon p);
+        player(string s, pokemon &p);
         int showPokemonNumber();
-        int showPokebollNumber();
+        int showPokeballNumber();
         int showBadgeNumber();
         pokemon getPokemon();
+        void battleWon();
+        void catchPokemon();
         
 };
 
@@ -77,6 +77,10 @@ class enemy{
         string name;
         pokemon enemyPokemon;
     public:
+        enemy();
+        enemy(string name, pokemon p);
+        pokemon getPokemon();
+        string getName();
         
 };
 

@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "pokemon.h"
+#include "../include/pokemon.h"
 
 using namespace std;
 
@@ -28,7 +28,7 @@ pokemon::pokemon(string name, int attack){
     this->atkValue = attack;
 }
 
-pokemon::pokemon(pokemon &old){
+pokemon::pokemon(const pokemon &old){
     this->name = old.name;
     this->hpValue = old.hpValue;
     this->atkValue = old.atkValue;
@@ -61,35 +61,49 @@ void pokedex::updatePokedex(pokemon newPokemon){
         }
 
         if(!isExist){
+            
             pokedexArray[value] = newPokemon;
-            value++;
+            
+            value = value + 1;
+            
         }
        }
 
 void pokedex::printPokedex(){
+
     for(int i = 0; i < this->value; i++){
-        cout << pokedexArray[i].getName() << '\n';
+        cout << pokedexArray[i].getName() << "\n";
     }
 }
 
+
+
 player::player(){
-    this->name = 'Ash';
+    this->name = "Ash";
     this->pokemonNumber = 0;
-    this->pokeballNumber = 0;
+    this->pokeballNumber = 10;
     this->badgeNumber = 0;
-    this->playerPokemon = *new pokemon();
+    this->playerPokemon = pokemon();
+    this->playerPokedex = pokedex();
 }
 
-player::player(string name, pokemon poke){
+player::player(string name, pokemon &poke){
     this->name = name;
     this->playerPokemon = poke;
+    this->pokemonNumber = 0;
+    this->pokeballNumber = 10;
+    this->badgeNumber = 0;
+    this->playerPokedex = pokedex();
+    
 }
+
+
 
 int player::showPokemonNumber(){
     return pokemonNumber;
 }
 
-int player::showPokemonNumber(){
+int player::showPokeballNumber(){
     return pokeballNumber;
 }
 
@@ -99,4 +113,32 @@ int player::showBadgeNumber(){
 
 pokemon player::getPokemon(){
     return this->playerPokemon;
+}
+
+void player::battleWon(){
+    this->badgeNumber = badgeNumber + 1;
+    this->pokeballNumber = pokeballNumber + 3;
+}
+
+void player::catchPokemon(){
+    this->pokemonNumber = pokemonNumber + 1;
+    this->pokeballNumber = pokeballNumber -1;
+}
+
+enemy::enemy(){
+    this->name = "Misty";
+    this->enemyPokemon = pokemon();
+}
+
+enemy::enemy(string name, pokemon p){
+    this->name = name,
+    this->enemyPokemon = p;
+}
+
+pokemon enemy::getPokemon(){
+    return this->enemyPokemon;
+}
+
+string enemy::getName(){
+    return this->name;
 }

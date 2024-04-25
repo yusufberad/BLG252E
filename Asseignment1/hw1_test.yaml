@@ -3,7 +3,7 @@
     blocker: true
 
 - build:
-    run: g++ -Wall -Werror src/main.cpp src/pokemon.cpp -I include -o hw1 -lm
+    run: g++ -Wall -Werror src/main.cpp src/pokemon.cpp -I include -o bin/hw1 -lm
     exit: 0
     points: 20
     blocker: true
@@ -12,7 +12,7 @@
 ###---Before Submitting please make sure you are passing all cases---###
 
 - case1:
-    run: ./hw1 enemyNames.txt pokemonNames.txt
+    run: bin/hw1 enemyNames.txt pokemonNames.txt
     script: 
         - expect: 'Welcome to the Pokemon Game!(.*)Please enter your name:\s+'
         - send: "Ash"
@@ -48,11 +48,12 @@
         - send: "6"
         - expect: '(.*)------- Pokedex -------(.*)Alakazam(.*)Arcanine(.*)Baltoy(.*)'
         - send: "7"
+        - expect: _EOF_
     exit: 0
     points: 40
 
 - case2:
-    run: valgrind --leak-check=full ./hw1 enemyNames.txt pokemonNames.txt  
+    run: valgrind --leak-check=full bin/hw1 enemyNames.txt pokemonNames.txt  
     script:
         - expect: '.*'
         - send: "Ash"
